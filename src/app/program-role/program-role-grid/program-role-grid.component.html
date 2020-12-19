@@ -1,0 +1,23 @@
+<div class="crudmenu">
+    <button mat-raised-button color="accent" (click)="createProle()">Add Program Role</button> 
+    <button mat-button (click)="editProle()">Edit Program Role</button>
+    <br>
+    Selected Row:<span id="selectedRows"></span>
+</div>
+    <ag-grid-angular
+    #agGrid
+    style="width: auto; height:85%;"
+    class="ag-theme-alpine" 
+    (selectionChanged)="onSelectionChanged()"   
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    rowSelection="rowSelection"
+    [defaultColDef]="defaultColDef"
+    [colResizeDefault]="colResizeDefault"
+    [rowClassRules]="rowClassRules"
+    (rowDoubleClicked) = "onRowDoubleClick($event)"
+    [enableRangeSelection]="true"
+    [pagination]="true"
+    [paginationAutoPageSize]="true"
+    >
+</ag-grid-angular>

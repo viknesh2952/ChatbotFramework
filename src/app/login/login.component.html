@@ -1,0 +1,33 @@
+<mat-card class="header-card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-logo"></div>
+    <mat-card-title>TVS Supply Chain Solutions</mat-card-title>
+    <mat-card-subtitle>Tvslsl-Chennai</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="assets/poster.jpg">
+</mat-card>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <mat-card class="login-card" color="primary">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>@Tvslsl</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="legacy">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Enter Your Username here" name="username" [(ngModel)]="username">
+      </mat-form-field>
+
+      <div class="example-container">
+        <mat-form-field appearance="legacy">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="password" class="ex">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span><a>Forgot Password?</a></span>
+    </mat-card-content>
+  </mat-card>
+</form>

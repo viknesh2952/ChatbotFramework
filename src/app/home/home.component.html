@@ -1,0 +1,73 @@
+<header>
+    <mat-toolbar fxLayout="row" color="primary">
+        <button mat-icon-button (click)="open=!open" id="menu-icon" class="borderless">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <img src="assets/tvslsl.jpg" id="small-logo">
+        <span fxFlex class="menu-name">Tvs Supply Chain Solutions</span>
+        <button mat-button *ngFor="let item of menuItems" [fxShow]="item.showOnDesktop" [fxShow.xs]="item.showOnMobile"
+            [fxShow.sm]="item.showOnTablet" (click)="logout(item.label)">
+            <mat-icon class="mr">{{item.icon}}</mat-icon>
+            {{item.label}}
+        </button>
+        <ng-container>
+            <button mat-icon-button [matMenuTriggerFor]="dropMenu" class="borderless" [fxShow.lg]="false">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #dropMenu="matMenu">
+                <ng-container *ngFor="let item of menuItems">
+                    <div [fxShow]="!item.showOnDesktop" [fxShow.sm]="!item.showOnTablet"
+                        [fxShow.xs]="!item.showOnMobile">
+                        <button mat-menu-item class="borderless">
+                            <mat-icon class="mr">{{item.icon}}</mat-icon>
+                            {{item.label}}
+                        </button>
+                        <mat-divider></mat-divider>
+                    </div>
+                </ng-container>
+            </mat-menu>
+        </ng-container>
+    </mat-toolbar>
+</header>
+<div id="jk">{{message}}</div>
+<mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav class="example-sidenav" fxLayout="column" mode="side" [opened]="open">
+        
+        <mat-nav-list class="list">
+            <mat-list-item (click)="show(3);" class="parent"><a mat-list-item
+                [routerLink]="'/ChatbotContainer/0'" (click)="message='Chatbot Container'">Chatbot Container</a>
+                <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu3}">
+                    expand_more
+                </mat-icon>
+        </mat-list-item>
+        <div class="submenu" [ngClass]="{'expanded' : showSubmenu3}" *ngIf="isShowing3 || isExpanded3">
+            <a *ngFor="let menu of storymenu" mat-list-item  (click)="nav2(menu.PRODUCT_CODE,menu.PRODUCT_KEY);">{{menu.PRODUCT_CODE}}</a>
+        </div>
+
+
+            <div *ngFor="let m of dynamic_menu_data;let i=index;">
+                <mat-list-item (click)="show(m.Program_key);" class="parent"><a mat-list-item
+                        [routerLink]="m.Program_key" (click)="message=m.Description"> {{m.Description}}</a>
+                        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="m.Program_key=='/Story/0'">
+                            expand_more
+                        </mat-icon>
+                        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu1}" *ngIf="m.Program_key=='/RefCodes'">
+                            expand_more
+                        </mat-icon>
+                </mat-list-item>
+                <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="m.Program_key=='/Story/0' && (isShowing || isExpanded)">
+                    <a *ngFor="let menu of storymenu" mat-list-item  (click)="nav(menu.PRODUCT_CODE,menu.PRODUCT_KEY);">{{menu.PRODUCT_CODE}}</a>
+                </div>
+                <div class="submenu" [ngClass]="{'expanded' : showSubmenu1}" *ngIf="m.Program_key=='/RefCodes' && (isShowing1 || isExpanded1)">
+                    <a *ngFor="let menu of refmenu" mat-list-item  (click)="nav1(menu.RCH_DESCRIPTION,menu.RCH_HEADER_KEY);">{{menu.RCH_DESCRIPTION}}</a>
+                </div>
+            </div>            
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content fxFlexFill>
+        <div (click)="open=false" class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

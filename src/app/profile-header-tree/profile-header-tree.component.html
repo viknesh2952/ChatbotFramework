@@ -1,0 +1,91 @@
+ <div class="crudmenu">
+  <button mat-raised-button color="accent" (click)="createDetail()">Add Detail</button>
+  <button mat-button (click)="editDetail()">Edit Detail</button>
+  <button mat-raised-button color="warn" (click)="deleteDetail()">Delete Detail</button>
+  <br>
+  Selected level:<span id="selectedRows"></span>
+</div>
+
+<!-- <kendo-treelist
+kendoTreeListExpandable
+[data]="rootData | async"
+[fetchChildren]="fetchChildren"
+[hasChildren]="hasChildren"
+[height]="400"
+> -->
+<!-- <kendo-treelist-column [expandable]="true" title="Name" [width]="250">
+  <ng-template kendoTreeListCellTemplate let-dataItem>
+      {{ dataItem.pmd_value_code }}
+      {{ dataItem.pmd_value_description }}
+  </ng-template>
+</kendo-treelist-column> -->
+<!-- <kendo-treelist-column field="Position" title="Position" [width]="180">
+</kendo-treelist-column>
+<kendo-treelist-column field="Extension" title="Extension" [width]="180">
+</kendo-treelist-column> --
+</kendo-treelist>
+<!--
+<ejs-treegrid
+[dataSource]="dataManager"
+[treeColumnIndex]="1"
+idMapping="level"
+parentIdMapping="pmd_parent_key"
+>
+<e-column
+  field="level"
+  headerText="level">
+</e-column></ejs-treegrid> -->
+
+<!--
+<p class="paragraphMargingLeft">Add New Milestone <i class="fa fa-plus-square" aria-hidden="true" (click)="addNewMilestone()"></i></p>
+<mat-tree #tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+    <li class="mat-tree-node" *ngIf="node.filename !== 'AddToDoList'  &&  node.filename !== 'AddSuggestion'">
+      <button mat-icon-button disabled></button>
+      {{node.filename}}: {{node.type }}
+      <i class="fa fa fa-pencil" aria-hidden="true"></i>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </li>
+  </mat-tree-node>
+
+
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+    <!- {{node | json}} --
+    <li>
+
+      <div class="mat-tree-node">
+        <button mat-icon-button [attr.aria-label]="'toggle ' + node.name" (click)="changeState(node)">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{node.expanded ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <div *ngIf="updateNodeItemName !==  node.filename else updateable">
+          {{node.filename}}
+        </div>
+        <ng-template #updateable>
+          <mat-form-field>
+            <input matInput  [(ngModel)]="updateItemNameInput" (change)="updateNode(node)" placeholder="Update Item">
+          </mat-form-field>
+
+        </ng-template>
+
+        <i class="fa fa fa-pencil" aria-hidden="true" (click)="enableUpdateNode(node)"></i>
+        <i class="fa fa-trash" aria-hidden="true" (click)="deleteNode(node)"></i>
+        <!-- <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button> --
+      </div>
+      <ul [class.example-tree-invisible]="node.expanded">
+
+        <div *ngFor="let data of node.children">
+          <div *ngIf="data.filename === 'AddToDoList'">
+            <p class="paragraphMargingLeft">Add To do list <i class="fa fa-plus-square" aria-hidden="true" (click)="addNewToDoList(node)"></i></p>
+          </div>
+          <div *ngIf="data.filename === 'AddSuggestion'">
+            <p class="paragraphMargingLeft">Add Suggestion<i class="fa fa-plus-square" aria-hidden="true" (click)="addNewSuggestion(node)"></i></p>
+          </div>
+        </div>
+
+        <ng-container matTreeNodeOutlet></ng-container>
+      </ul>
+    </li>
+  </mat-nested-tree-node>
+</mat-tree> -->

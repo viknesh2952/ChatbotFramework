@@ -1,0 +1,208 @@
+<div class="row h-100" *ngIf="!this.filteredUserId || (!this.user && this.id)">
+    <div class="col-sm-12 my-auto">
+        <div class="text-center">
+            <mat-spinner style="margin-left:45%;"></mat-spinner>
+            Loading Contents...
+        </div>
+    </div>
+</div> 
+<div class="container" *ngIf="this.filteredUserId">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #profileform="ngForm" ngNativeValidate (ngSubmit)="test(profileform.valid,profileform)"
+        class="create-form form-horizontal">
+        <fieldset [disabled]="readonly">
+            <!-- <input type="number" id="uprl_key" name="uprl_key" [(ngModel)]="profile.uprl_key" hidden> -->
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-2" for="user"><sup>*</sup>User:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>User</mat-label>
+                        <input matInput placeholder="Select User" id="user" [matAutocomplete]="autou" name="user"
+                            [formControl]="UserCtrl" [(ngModel)]="user" required>
+                        <mat-autocomplete #autou="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredUserId | async" [value]="id.user_display_name">
+                                {{id.user_display_name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="user==null && isSubmitted">Select Anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_user_profile_key"><sup>*</sup>User Profile:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>User Profile</mat-label>
+                        <input matInput type="number" id="uprl_user_profile_key" name="uprl_user_profile_key"
+                            [(ngModel)]="profile.uprl_user_profile_key" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="profile.uprl_user_profile_key==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-2" for="role"><sup>*</sup>Role:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Role</mat-label>
+                        <input matInput placeholder="Select Role" id="role" [matAutocomplete]="auto" name="role"
+                            [formControl]="RoleCtrl" [(ngModel)]="role" required>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredRoleId | async" [value]="id.role_description">
+                                {{id.role_code}} - {{id.role_description}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="role==null && isSubmitted">Select Anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_display_name"><sup>*</sup>Display Name:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Display Name</mat-label>
+                        <input matInput id="uprl_display_name" type="text" name="profile.uprl_display_name"
+                            [(ngModel)]="profile.uprl_display_name">
+                        <div class="control-label">
+                            <mat-error *ngIf="profile.uprl_display_name==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_default_printer">Default Printer: </label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Default Printer</mat-label>
+                        <input matInput id="uprl_default_printer" name="profile.uprl_default_printer"
+                            [(ngModel)]="profile.uprl_default_printer">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_landing_program_key"><sup>*</sup>Landing Program:
+                    </label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Landing Program</mat-label>
+                        <input matInput type="number" id="uprl_landing_program_key" placeholder="Number"
+                            name="profile.uprl_landing_program_key" [(ngModel)]="profile.uprl_landing_program_key"
+                            required>
+                        <div class="control-label">
+                            <mat-error *ngIf="profile.uprl_landing_program_key==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_pwd_never_expire"><sup>*</sup>PWD Never Expire:
+                    </label>
+                    <mat-form-field appearance="outline" class="lookup">
+                        <mat-label>Select Yes or No</mat-label>
+                        <mat-select [(ngModel)]="profile.uprl_pwd_never_expire" name="profile.uprl_pwd_never_expire"
+                            [disabled]="readonly">
+                            <mat-option *ngFor="let expiry of expiry_list" [value]="expiry.value">
+                                {{expiry.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="sub_uprl_default_printer_id"><sup>*</sup>PWD Expire
+                        days:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>No of Days </mat-label>
+                        <input matInput type="number" placeholder="Number" id="uprl_pwd_expire_days" name="profile.uprl_pwd_expire_days"
+                            [(ngModel)]="profile.uprl_pwd_expire_days" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="profile.uprl_pwd_expire_days==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <!-- <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_profile_key"><sup>*</sup>Profile:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Profile</mat-label>
+                        <input matInput type="number" id="uprl_profile_key " name="profile.uprl_profile_key "
+                            [(ngModel)]="profile.uprl_profile_key" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="profile.uprl_profile_key==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div> -->
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="active"><sup>*</sup>Active Flag:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Active Flag</mat-label>
+                        <input matInput placeholder="Active Flag" id="active" [formControl]="RefDetailCtrl"
+                            [matAutocomplete]="autor" name="ref" [(ngModel)]="ref" required>
+                        <mat-autocomplete #autor="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                                {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="ref==null && isSubmitted">Select anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_active_from"><sup>*</sup>Active from: </label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput [matDatepicker]="picker" id="uprl_active_from" name="uprl_active_from"
+                            [(ngModel)]="uprl_active_from" #from="ngModel" maxlength="10" (dateInput)="isValidDate(uprl_active_from,1)" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && from.valid==false && from.pristine==true">Required field *</mat-error>
+                            <mat-error *ngIf="!fromvalid && from.dirty==true">Invalid date</mat-error>
+                            <mat-error *ngIf="id==0 && from_past && chkpastcall(1)">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="uprl_active_to"><sup>*</sup>Active To:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput [matDatepicker]="picker1" id="uprl_active_to" name="uprl_active_to"
+                            [(ngModel)]="uprl_active_to" #to="ngModel" maxlength="10" (dateInput)="isValidDate(uprl_active_to,2)" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker1></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && to.valid==false && to.pristine==true">Required field * </mat-error>
+                            <mat-error *ngIf="uprl_active_from!=null && uprl_active_to!=null && !activeTo()">Active To date should be greater than Active from</mat-error>
+                            <mat-error *ngIf="!tovalid && to.dirty==true">Invalid Date</mat-error>
+                            <mat-error *ngIf="id==0 && to_past && chkpastcall(2)">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="container row submit">
+            <div class="col-sm-4">
+            </div>
+            <div *ngIf="!readonly" class="col-sm-2 form-group">
+                <button mat-raised-button color="accent" type="submit"
+                    (click)="test(profileform.valid,profileform)">Save</button>
+            </div>
+            <div class="col-sm-2 form-group">
+                <button mat-raised-button color="warn" (click)="back()">Close</button>
+            </div>
+        </div>
+    </form>
+</div>

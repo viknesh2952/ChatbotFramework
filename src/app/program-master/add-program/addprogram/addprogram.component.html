@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="float-button">
+      <button mat-raised-button (click)="back()"><mat-icon>chevron_left</mat-icon>Back</button>
+  </div>
+
+  <form #programform="ngForm" ngNativeValidate (ngSubmit)="test(programform.valid,programform)" class="create-form form-horizontal" novalidate>
+      <fieldset [disabled]="readonly">
+          <div class="row">
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_type">Program Type:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Program Type</mat-label>
+                      <input matInput placeholder="Program Type"
+                       id="program_type" [matAutocomplete]="auto" name="program_type" [(ngModel)]="program.program_type" required >
+                       <mat-autocomplete #auto="matAutocomplete" ></mat-autocomplete>
+                       <div class="control-label">
+                          <mat-error *ngIf="program.program_type == null && isSubmitted ">
+                              Program Type is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_code">Program Code:</label>
+                  <mat-form-field class="lookup " appearance="outline" >
+                      <mat-label>Program Code</mat-label>
+                      <input required matInput placeholder="Program Code" id="program_code" name="program_code" [matAutocomplete]="auto"
+                       [(ngModel)]="program.program_code">
+                       <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                       <div class="control-label">
+                          <mat-error *ngIf="program.program_code == null && isSubmitted ">Program Code is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+
+          </div>
+          <div class="row">
+
+              <div class="col-md-6 form-group">
+                  <label  class="control-label col-sm-4" for="program_description">program Description:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>program Description</mat-label>
+                      <input  matInput placeholder="program Description "id="program_description" type="text"
+                      [matAutocomplete]="auto" name="program_description" [(ngModel)]="program.program_description">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <div class="control-label">
+                        <mat-error *ngIf="program.program_description == null && isSubmitted ">program description Name is Mandatory *</mat-error>
+                    </div>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_page_name">program Page Name:</label>
+                  <mat-form-field class="lookup" appearance="outline">
+                      <mat-label>program Page Name</mat-label>
+                      <input required matInput placeholder="program Page Name " id="program_page_name" type="text"
+                      [matAutocomplete]="auto"  name="program_page_name" [(ngModel)]="program.program_page_name">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <!-- <div class="control-label">
+                          <mat-error *ngIf="program.program_page_name == null && isSubmitted ">program Page Name is Mandatory *</mat-error>
+                      </div> -->
+                  </mat-form-field>
+              </div>
+
+
+          </div>
+          <div class="row">
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_page_path">program Page Path:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>program Page Path</mat-label>
+                      <input required matInput  placeholder="program Page Path " id="program_page_path" name="program_page_path"
+                      [(ngModel)]="program.program_page_path" [matAutocomplete]="auto" >
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <!-- <div class="control-label">
+                          <mat-error *ngIf="program.user_last_name == null && isSubmitted ">Role Description is Mandatory *</mat-error>
+                      </div> -->
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_icon_path">program Icon Path:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>program Icon Path</mat-label>
+                      <input required matInput  placeholder="Password" id="program_icon_path" name="program_icon_path" [(ngModel)]="program.program_icon_path"
+                      [matAutocomplete]="auto">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <!-- <div class="control-label">
+                          <mat-error *ngIf="program.program_icon_path == null && isSubmitted ">program Icon Path is Mandatory *</mat-error>
+                      </div> -->
+                  </mat-form-field>
+              </div>
+
+
+          </div>
+          <div class="row">
+
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_access_control">program Access Control:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>program Access Control</mat-label>
+                      <input required matInput id="program_access_control" type="number" name="program_access_control" [(ngModel)]="program.program_access_control">
+
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_order">Program Order:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Program Order</mat-label>
+                      <input required matInput placeholder="User Default Profile Key" [matAutocomplete]="auto" id="program_order"  type="number" name="program_order" [(ngModel)]="program.program_order">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <div class="control-label">
+                          <mat-error *ngIf="program.program_order == null && isSubmitted ">Program Order  is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_active_status">Program Active Status:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Active Status</mat-label>
+                      <input matInput placeholder="Program Active Status" id="program_active_status" [matAutocomplete]="autor"
+                      [formControl]="RefDetailCtrl" [(ngModel)]="ref">
+                      <mat-autocomplete #autor="matAutocomplete">
+                      <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                          {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                      </mat-option>
+                  </mat-autocomplete>
+                  <!-- <div class="control-label">
+                      <mat-error *ngIf="program.ref==null && isSubmitted">Select anyone *</mat-error>
+                  </div> -->
+              </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_active_from ">Program Active From:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label> Active From</mat-label>
+                      <input required matInput [min]="min" placeholder="Active from" [matDatepicker]="picker" id="program_active_from" name="program_active_from" [(ngModel)]="program.program_active_from">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker></mat-datepicker>
+                      <div class="control-label">
+                          <mat-error *ngIf="program.program_active_from == null && isSubmitted ">Active from is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+          </div>
+
+
+          <div class="row">
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="program_active_to ">Program Active To:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label> Active To</mat-label>
+                      <input required matInput [min]="min" placeholder="Active from" [matDatepicker]="picker1" id="program_active_to" name="program_active_to" [(ngModel)]="program.program_active_to">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker1></mat-datepicker>
+                      <div class="control-label">
+                          <mat-error *ngIf="program.program_active_to == null && isSubmitted ">Active To is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+
+          </div>
+          <!-- <div class="row">
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-3" for="user_lock_key">User Lock Key</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>User Lock Key</mat-label>
+                      <input matInput id="user_lock_key"  type="number" name="user_lock_key" [(ngModel)]="program.user_lock_key">
+
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-3" for="user_profile_key">User Profile Key</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>User Profile Key</mat-label>
+                      <input matInput id="user_profile_key"  type="number" type="text" name="user_profile_key" [(ngModel)]="program.user_profile_key">
+                  </mat-form-field>
+              </div>
+
+          </div> -->
+          <div class="container row">
+              <div class="col-sm-4 form-group">
+                  <button mat-raised-button color="accent" type="submit" (click)="test(programform.valid,programform)">Save</button>
+              </div>
+              <div class="col-sm-4 form-group">
+                  <button mat-raised-button color="warn" (click)="back()">Close</button>
+              </div>
+          </div>
+      </fieldset>
+  </form>
+</div>

@@ -1,0 +1,196 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()"><mat-icon>chevron_left</mat-icon>Back</button>
+    </div>
+
+    <form #userform="ngForm" ngNativeValidate (ngSubmit)="test(userform.valid,userform)" class="create-form form-horizontal" novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_code">User Code:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>User code</mat-label>
+                        <input matInput placeholder="User Code"
+                         id="user_code" [matAutocomplete]="auto" name="user_code" [(ngModel)]="user.user_code" required >
+                         <mat-autocomplete #auto="matAutocomplete" ></mat-autocomplete>
+                         <div class="control-label">
+                            <mat-error *ngIf="user.user_code == null && isSubmitted ">
+                                User Code is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_first_name">First Name:</label>
+                    <mat-form-field class="lookup " appearance="outline" >
+                        <mat-label>First Name</mat-label>
+                        <input required matInput placeholder="User First Name" id="user_first_name" name="user_first_name" [matAutocomplete]="auto"
+                         [(ngModel)]="user.user_first_name">
+                         <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                         <div class="control-label">
+                            <mat-error *ngIf="user.user_first_name == null && isSubmitted ">First Name is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label  class="control-label col-sm-4" for="user_middle_name">Middle name:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Middle name</mat-label>
+                        <input  required matInput placeholder="User Middle Name "id="user_middle_name" type="text"
+                        [matAutocomplete]="auto" name="user_middle_name" [(ngModel)]="user.user_middle_name">
+                        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                        <div class="control-label">
+                          <mat-error *ngIf="user.user_middle_name == null && isSubmitted ">Middle Name is Mandatory *</mat-error>
+                      </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_display_name">User Display name:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Display name</mat-label>
+                        <input required matInput placeholder="User Display Name " id="user_display_name" type="text"
+                        [matAutocomplete]="auto"  name="user_display_name" [(ngModel)]="user.user_display_name">
+                        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="user.user_display_name == null && isSubmitted ">Display Name is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_last_name">User Last name:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Last name</mat-label>
+                        <input required matInput  placeholder="User Last Name " id="user_last_name" name="user_last_name"
+                        [(ngModel)]="user.user_last_name" [matAutocomplete]="auto" >
+                        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                         <div class="control-label">
+                            <mat-error *ngIf="user.user_last_name == null && isSubmitted ">Last name is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_password">Password:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input required matInput  placeholder="Password" id="user_password" name="user_password" [(ngModel)]="user.user_password"
+                        [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="user.user_password == null && isSubmitted ">Password is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_address_link">User Address Link:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Address Link</mat-label>
+                        <input required matInput id="user_address_link" type="number" name="user_address_link" [(ngModel)]="user.user_address_link">
+                        <div class="control-label">
+                          <mat-error *ngIf="user.user_address_link == null && isSubmitted ">Address link is Mandatory *</mat-error>
+                      </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_default_profile_key">Default Profile:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Default Profile</mat-label>
+                        <input required matInput placeholder="User Default Profile Key" [matAutocomplete]="auto" id="user_default_profile_key"  type="number" name="user_default_profile_key" [(ngModel)]="user.user_default_profile_key">
+                        <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="user.user_default_profile_key == null && isSubmitted ">Default Profile  is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_active_status">User Active Status:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Active Status</mat-label>
+                        <input matInput placeholder="User Active Status" id="user_active_status" [matAutocomplete]="autor"
+                        [formControl]="RefDetailCtrl" [(ngModel)]="ref">
+                        <mat-autocomplete #autor="matAutocomplete">
+                        <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                            {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <div class="control-label">
+                        <mat-error *ngIf="user.ref==null && isSubmitted">Select anyone *</mat-error>
+                    </div>
+                </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_active_from ">User Active From:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label> Active From</mat-label>
+                        <input required matInput  [min]="min" placeholder="Active from" [matDatepicker]="picker" id="user_active_from" name="user_active_from" [(ngModel)]="user.user_active_from">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="user.user_active_from == null && isSubmitted ">Active from is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="user_active_to ">User Active To:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label> Active To</mat-label>
+                        <input required matInput  [min]="min" placeholder="Active from" [matDatepicker]="picker1" id="user_active_to" name="user_active_to" [(ngModel)]="user.user_active_to">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker1></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="user.user_active_to == null && isSubmitted ">Active To is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <!-- <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-3" for="user_lock_key">User Lock Key</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>User Lock Key</mat-label>
+                        <input matInput id="user_lock_key"  type="number" name="user_lock_key" [(ngModel)]="user.user_lock_key">
+
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-3" for="user_profile_key">User Profile Key</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>User Profile Key</mat-label>
+                        <input matInput id="user_profile_key"  type="number" type="text" name="user_profile_key" [(ngModel)]="user.user_profile_key">
+                    </mat-form-field>
+                </div>
+
+            </div> -->
+            <div class="container row">
+                <div class="col-sm-4 form-group">
+                    <button mat-raised-button color="accent" type="submit" (click)="test(userform.valid,userform)">Save</button>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

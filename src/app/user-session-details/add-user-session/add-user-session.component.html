@@ -1,0 +1,197 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #usersessiondetailform="ngForm" class="create-form form-horizontal" (ngSubmit)="test(usersessiondetailform.valid,usersessiondetailform)"
+        novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="usd_session_id">USD Session Id:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USD Session Id</mat-label>
+                        <input matInput id="usd_session_id" type="text" name="usd_session_id"
+                            [(ngModel)]="usersessiondetail.usd_session_id" required [disabled]="isDisabled">
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.usd_session_id==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>    
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="usd_user_key">USD User Key:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USD User Key</mat-label>
+                        <input matInput id="usd_user_key" type="text" name="usd_user_key"
+                            [(ngModel)]="usersessiondetail.usd_user_key" required [disabled]="isDisabled">
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.usd_user_key==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="usd_user_profile_role_key">USD User Profile Role Key:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USD User Profile Role Key</mat-label>
+                        <input matInput id="usd_user_profile_role_key" type="text" name="usd_user_profile_role_key"
+                            [(ngModel)]="usersessiondetail.usd_user_profile_role_key" required [disabled]="isDisabled">
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.usd_user_profile_role_key==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>    
+                    </mat-form-field>
+                </div>
+                <!---DATE-->
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="usd_login_on">USD Login On:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>USD Login On</mat-label>
+                        <input matInput [matDatepicker]="picker" id="usd_login_on" name="usd_login_on"
+                         [(ngModel)]="usersessiondetail.usd_login_on" #date="ngModel">
+                         <mat-error *ngIf="isSubmitted && date.invalid">Select USD Login On:</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="usersessiondetail.usd_login_on==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!--Date-->
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="usd_last_db_access">USD Last DB Access:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>USD Last DB Access</mat-label>
+                        <input matInput [matDatepicker]="picker1" id="usd_last_db_access" name="usd_last_db_access"
+                         [(ngModel)]="usersessiondetail.usd_last_db_access" #date="ngModel" >
+                         <mat-error *ngIf="isSubmitted && date.invalid">Select USD Last DB Access</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker1></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="usersessiondetail.usd_last_db_access==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_time_zone">USD Time Zone:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USD Time Zone</mat-label>
+                        <input matInput id="ush_time_zone" type="text" name="ush_time_zone"
+                            [(ngModel)]="usersessiondetail.ush_time_zone" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.ush_time_zone==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+            <!--Date-->
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_active_status">USH Active Status:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USH Active Status</mat-label>
+                        <input matInput id="ush_active_status" type="text" name="ush_active_status"
+                            [(ngModel)]="usersessiondetail.ush_active_status" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.ush_active_status==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>
+                    </mat-form-field>
+                </div>
+                
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_purge_on">USH Purge On:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>USH Purge On</mat-label>
+                        <input matInput [matDatepicker]="picker2" id="ush_purge_on" name="ush_purge_on"
+                         [(ngModel)]="usersessiondetail.ush_purge_on" #date="ngModel">
+                         <mat-error *ngIf="isSubmitted && date.invalid">Select USH Purge On</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker2></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="usersessiondetail.ush_purge_on==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <!--Date-->
+              
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_logout_on">USH Logout On:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>USH Logout On</mat-label>
+                        <input matInput [matDatepicker]="picker3" id="ush_logout_on" name="ush_logout_on"
+                         [(ngModel)]="usersessiondetail.ush_logout_on" #date="ngModel">
+                         <mat-error *ngIf="isSubmitted && date.invalid">Select USH Logout On</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker3></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="usersessiondetail.ush_logout_on==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_ip_address">USH IP Address:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USH IP Address</mat-label>
+                        <input matInput id="ush_ip_address" type="text" name="ush_ip_address"
+                            [(ngModel)]="usersessiondetail.ush_ip_address" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.ush_ip_address==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>    
+                    </mat-form-field>
+                </div>
+             
+            </div>
+            <div class="row">
+                   <!--Date-->
+                   <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_created_on">USH Created On:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>USH Created On</mat-label>
+                        <input matInput [matDatepicker]="picker4" id="ush_created_on" name="ush_created_on"
+                         [(ngModel)]="usersessiondetail.ush_created_on" #date="ngModel">
+                         <mat-error *ngIf="isSubmitted && date.invalid">Select USH Created On</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker4></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="usersessiondetail.ush_created_on==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="ush_lock_key">USH Lock Key:</label>
+                    <mat-form-field class="small-input-field" appearance="outline">
+                        <mat-label>USH Lock Key</mat-label>
+                        <input matInput id="ush_lock_key" type="text" name="ush_lock_key"
+                            [(ngModel)]="usersessiondetail.ush_lock_key" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="usersessiondetail.ush_lock_key==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>
+                    </mat-form-field>
+                </div>
+            </div>
+           
+            <div class="container row">
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="accent" type="submit"
+                        (click)="test(usersessiondetailform.valid,usersessiondetailform)">Save</button>
+                </div>
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

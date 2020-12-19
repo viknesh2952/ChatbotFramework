@@ -1,0 +1,10 @@
+{
+    "global":{
+      "DOMAIN" :"https://t-aistore.tvslsl.in",
+        "PORT":5002,
+        "API_PREFIX":"/api/v1/",
+        "DATE_FORMAT_OUTPUT":"yyyy-MM-dd",
+        "DATE_FORMAT_DISPLAY":"YYYY-MM-DD",
+	    	"PROJECT_NAME":"TEST_ChatbotAdminPortal"
+    }
+}

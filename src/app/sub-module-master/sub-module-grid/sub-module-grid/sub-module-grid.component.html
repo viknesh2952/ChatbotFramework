@@ -1,0 +1,23 @@
+<div class="crudmenu">
+  <button mat-raised-button color="accent" (click)="createModule()">Add Sub Module</button>
+  <button mat-button (click)="editModule()">Edit Sub Module</button>
+  <button mat-raised-button color="warn" (click)="deleteModule()">Delete Sub Module</button>
+  <br>
+  Selected Row:<span id="selectedRows"></span>
+</div>
+  <ag-grid-angular
+  #agGrid
+  style="width: 98%; height:77%;"
+  class="ag-theme-alpine"
+  (selectionChanged)="onSelectionChanged()"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  rowSelection="rowSelection"
+  [defaultColDef]="defaultColDef"
+  [colResizeDefault]="colResizeDefault"
+  (rowDoubleClicked) = "onRowDoubleClick()"
+  [enableRangeSelection]="true"
+  [pagination]="true"
+  [paginationAutoPageSize]="true"
+ >
+</ag-grid-angular>

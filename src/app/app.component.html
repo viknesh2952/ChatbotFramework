@@ -1,0 +1,4 @@
+    <app-login *ngIf="!login" [loggedin]="login" (loggedinChanged)="loggedinHandler($event)"></app-login>
+    <app-home *ngIf="login"></app-home>
+    <!-- <app-home></app-home> -->
+    

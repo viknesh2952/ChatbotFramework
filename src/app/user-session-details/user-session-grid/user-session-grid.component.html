@@ -1,0 +1,24 @@
+<!-- <div class="crudmenu"> -->
+    <!-- <button mat-raised-button color="accent" (click)="createusersessiondetail()">Add User Session Details</button>
+    <button mat-button (click)="editusersessiondetail()">Edit User Session Details</button>
+    <button mat-raised-button color="warn" (click)="deleteusersessiondetail()">Delete User Session Details</button> -->
+    <!-- <br>
+    Selected Row:<span id="selectedRows"></span>
+    </div> -->
+    <ag-grid-angular
+    #agGrid
+    style="width: 98%; height:95%;"
+    class="ag-theme-alpine"
+    (selectionChanged)="onSelectionChanged()"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    rowSelection="rowSelection"
+    [defaultColDef]="defaultColDef"
+    [colResizeDefault]="colResizeDefault"
+    [rowClassRules]="rowClassRules"
+    (rowDoubleClicked) = "onRowDoubleClick()"
+    [enableRangeSelection]="true"
+    [pagination]="true"
+    [paginationAutoPageSize]="true"
+    >
+    </ag-grid-angular>

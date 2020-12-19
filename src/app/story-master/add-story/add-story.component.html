@@ -1,0 +1,461 @@
+<ng-template #api let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">API Parameter</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <fieldset [disabled]="readonly">
+    <div class="modal-body">
+        <div *ngIf="!Not_api">
+        <div class="row">
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Intent</mat-label>
+                    <input matInput  placeholder="Intent" name="story_api.cas_intent"
+                        [(ngModel)]="story_api.cas_intent">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-1 modal_button"></div>
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>SQL</mat-label>
+                    <input matInput placeholder="SQL" name="story_api.cas_sql"
+                        [(ngModel)]="story_api.cas_sql">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter 1</mat-label>
+                    <input matInput  placeholder="Paramter 1" name="story_api.cas_parameter_1"
+                        [(ngModel)]="story_api.cas_parameter_1">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-1 modal_button"><button mat-raised-button color="primary" (click)="getStoryasparam(story_api.cas_parameter_1,api_parameter)">SQL</button></div>
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter 2</mat-label>
+                    <input matInput  placeholder="Paramter 2" name="story_api.cas_parameter_2"
+                        [(ngModel)]="story_api.cas_parameter_2">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-1 modal_button"><button mat-raised-button color="primary" (click)="getStoryasparam(story_api.cas_parameter_2,api_parameter)">SQL</button></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter 3</mat-label>
+                    <input matInput  placeholder="Paramter 3" name="story_api.cas_parameter_3"
+                        [(ngModel)]="story_api.cas_parameter_3">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-1 modal_button"><button mat-raised-button color="primary" (click)="getStoryasparam(story_api.cas_parameter_3,api_parameter)">SQL</button></div>
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter 4</mat-label>
+                    <input matInput  placeholder="Paramter 4" name="story_api.cas_parameter_4"
+                        [(ngModel)]="story_api.cas_parameter_4">
+                </mat-form-field>
+                
+            </div>
+            <div class="col-lg-1 modal_button"><button mat-raised-button color="primary" (click)="getStoryasparam(story_api.cas_parameter_4,api_parameter)">SQL</button></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter 5</mat-label>
+                    <input matInput  placeholder="Paramter 5" name="story_api.cas_parameter_5"
+                        [(ngModel)]="story_api.cas_parameter_5">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-1 modal_button"><button mat-raised-button color="primary" (click)="getStoryasparam(story_api.cas_parameter_5,api_parameter)">SQL</button></div>
+            <div class="col-lg-5 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter 6</mat-label>
+                    <input matInput  placeholder="Paramter 6" name="story_api.cas_parameter_6"
+                        [(ngModel)]="story_api.cas_parameter_6">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-1 modal_button"><button mat-raised-button color="primary" (click)="getStoryasparam(story_api.cas_parameter_6,api_parameter)">SQL</button></div>
+        </div>
+        </div>
+        <div *ngIf="Not_api">
+            <h3>No Records Found</h3>
+        </div>
+        
+    </div>
+</fieldset>
+<div class="modal-footer">
+    <button type="button" mat-raised-button color="accent" *ngIf="!readonly" (click)="c('Save click')">Save</button>
+    <button type="button" mat-raised-button color="warn" *ngIf="readonly" (click)="d('Cross click')">Close</button>
+</div>
+</ng-template>
+
+<ng-template #api_parameter let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Parameter SQL</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <fieldset [disabled]="readonly">
+    <div class="modal-body">
+        <div *ngIf="!Not_params">
+        <div class="row">
+            <div class="col-lg-6 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Intent</mat-label>
+                    <input matInput  placeholder="Intent" name="story_params.INTENT"
+                    [(ngModel)]="story_params.INTENT">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter Name</mat-label>
+                    <input matInput  placeholder="Parameter Name" name="story_params.PARAMETERNAME"
+                        [(ngModel)]="story_params.PARAMETERNAME">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 form-group">
+                <mat-form-field class="small-input-field " appearance="outline">
+                    <mat-label>Parameter SQL</mat-label>
+                    <input matInput  placeholder="SQL" name="story_params.PARAMETERSQL"
+                        [(ngModel)]="story_params.PARAMETERSQL">
+                </mat-form-field>
+            </div>
+        </div>
+        </div>
+        <div *ngIf="Not_params">
+            <h3>No Records Found</h3>
+        </div>
+    </div>
+</fieldset>
+<div class="modal-footer">
+    <button type="button" mat-raised-button color="accent" *ngIf="!readonly" (click)="c('Save click')">Save</button>
+    <button type="button" mat-raised-button color="warn" *ngIf="readonly" (click)="d('Cross click')">Close</button>
+</div>
+</ng-template>
+<ng-template #output_config let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Output Configuration</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <fieldset [disabled]="readonly">
+    <div class="modal-body">
+        <div *ngIf="!Not_output">
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>Api Variable</mat-label>
+                        <input matInput id="variable" placeholder="API Variable" name="story_intent.api_variable"
+                            [(ngModel)]="story_intent.api_variable">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>Display Output</mat-label>
+                        <input matInput placeholder="Display Output" name="story_intent.display_output"
+                            [(ngModel)]="story_intent.display_output">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>Response Intent</mat-label>
+                        <input matInput placeholder="Response Intent" name="story_intent.res_intent"
+                            [(ngModel)]="story_intent.res_intent">
+                    </mat-form-field>
+                </div>
+            </div>
+            </div>
+            <div *ngIf="Not_output">
+                <h3>No Records Found</h3>
+            </div>
+    </div>
+</fieldset>
+    <div class="modal-footer">
+        <button type="button" mat-raised-button color="accent" *ngIf="!readonly" (click)="updateStoryOutput()">Save</button>
+        <button type="button" mat-raised-button color="warn" *ngIf="readonly" (click)="d('Cross click')">Close</button>
+    </div>
+</ng-template>
+
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #storyform="ngForm" class="create-form form-horizontal" (ngSubmit)="test(storyform.valid,storyform)"
+        novalidate>
+        <div *ngIf="id!=0" class="api_button">
+            <button mat-raised-button color="primary" (click)="open(api)">API Parameter</button>
+            <button mat-raised-button color="accent" (click)="open(api_parameter)">Parameter SQL</button>
+            <button mat-raised-button color="warn" (click)="open(output_config)">Output Config</button>
+        </div>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-2" for="app_id"><sup>*</sup>App Id:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>App Id</mat-label>
+                        <input matInput placeholder="Select AppId" id="app_id" #app_id [matAutocomplete]="auto"
+                            name="product" [formControl]="AppCtrl" [(ngModel)]="product"
+                            (blur)="callModule(app_id.value)" [disabled]="disableappid" required>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredAppId | async" [value]="id.PRODUCT_NAME">
+                                {{id.PRODUCT_CODE}} - {{id.PRODUCT_NAME}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="product==null && isSubmitted">Select Anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="active"><sup>*</sup>Active Flag:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Active Flag</mat-label>
+                        <input matInput placeholder="Active Flag" id="active" [formControl]="RefDetailCtrl"
+                            [matAutocomplete]="autor" name="ref" [(ngModel)]="ref" required>
+                        <mat-autocomplete #autor="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                                {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="ref==null && isSubmitted">Select anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="expiry"><sup>*</sup>Expiry Date:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput [matDatepicker]="picker" id="expiry" name="expiry" [(ngModel)]="expiry"
+                            #date="ngModel" maxlength="10" (dateInput)="isValidDate(expiry)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && expiry==null">Required field *</mat-error>
+                            <mat-error *ngIf="!expiryvalid && date.dirty==true">Invalid date</mat-error>
+                            <mat-error *ngIf="id==0 && expiry_past && chkpastcall()">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <input type="number" name="user_id" [(ngModel)]="user_id" style="display:none;">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="order">Order:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>Order By</mat-label>
+                        <input matInput id="order" type="number" placeholder="number" name="story.order_by"
+                            [(ngModel)]="story.order_by" #order="ngModel">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h3 class="text-on-pannel"><sup>*</sup>Question</h3>
+                            <table class="question">
+                                <div class="control-label">
+                                    <mat-error
+                                        *ngIf="(story.question[0]==null || story.question[0]=='') && isSubmitted">
+                                        Required field *</mat-error>
+                                </div>
+                                <tr *ngFor="let qn of questionset; let i = index;">
+                                    <td><label class="control-label" for="question"><sup>*</sup>Pattern {{i+1}}:</label>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Pattern {{i+1}}</mat-label>
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+                                                cdkAutosizeMaxRows="6" id="question" type="text"
+                                                name="story.question{{i}}" #question="ngModel"
+                                                [(ngModel)]="story.question[i]"></textarea>
+                                        </mat-form-field>
+                                        <mat-icon (click)="removeQuestion(i)" color="warn" style="cursor:pointer"
+                                            *ngIf="i>0">delete
+                                        </mat-icon>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-10 text-right form-group">
+                                    <button mat-raised-button color="primary" (click)="addQuestion()">Add
+                                        Pattern</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="intent">Intent:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Intent</mat-label>
+                        <input matInput id="intent" type="text" name="intent" [(ngModel)]="story.intent">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="entity">Entity:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Entity</mat-label>
+                        <input matInput id="entity" type="text" name="entity" [(ngModel)]="story.entity">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label class="control-label col-sm-2" for="reference_url">Reference Url:</label>
+                    <mat-form-field class="long-input-field" appearance="outline">
+                        <mat-label>URL</mat-label>
+                        <input matInput id="reference_url" type="text" name="story.reference_url"
+                            [(ngModel)]="story.reference_url">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="module_id"><sup>*</sup>Module:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Module Id</mat-label>
+                        <input matInput placeholder="Select ModuleId" #moduleid id="module_id" [matAutocomplete]="autom"
+                            [formControl]="ModuleCtrl" [(ngModel)]="module"
+                            (blur)="callSubModule(app_id.value,moduleid.value)" required>
+                        <mat-autocomplete #autom="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredModuleId | async" [value]="id.MODULE_NAME">
+                                {{id.MODULE_CODE}} - {{id.MODULE_NAME}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="module==null && isSubmitted">Required field *
+                                (if None enter 0)</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="sub_module_id"><sup>*</sup>Sub Module:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Sub Module Id</mat-label>
+                        <input matInput placeholder="Select Sub-ModuleId" id="sub_module_id" [matAutocomplete]="autos"
+                            [formControl]="SubModuleCtrl" [(ngModel)]="submodule" required>
+                        <mat-autocomplete #autos="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredSubModuleId | async" [value]="id.SUB_MODULE_NAME">
+                                {{id.SUB_MODULE_CODE}} - {{id.SUB_MODULE_NAME}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="submodule==null && isSubmitted">Required field *
+                                (if None enter 0)</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h3 class="text-on-pannel"><sup>*</sup>Keyword</h3>
+                            <table>
+                                <div class="control-label">
+                                    <mat-error
+                                        *ngIf="(story.keywords[0]==null || story.keywords[0]=='') && isSubmitted">
+                                        Required field *</mat-error>
+                                </div>
+                                <tr *ngFor="let key of keywordset; let i = index;">
+                                    <td><label class="control-label" for="keyword">Keyword {{i+1}}:</label>
+                                        <mat-form-field class="small-input-field " appearance="outline">
+                                            <mat-label>Keyword {{i+1}}</mat-label>
+                                            <input matInput id="keyword" type="text" name="story.keywords{{i}}"
+                                                [(ngModel)]="story.keywords[i]">
+                                        </mat-form-field>
+                                        <mat-icon (click)="removeKeyword(i)" color="warn" style="cursor:pointer"
+                                            *ngIf="i>0">delete
+                                        </mat-icon>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-4 text-right form-group">
+                                    <button mat-raised-button color="primary" (click)="addKeyword()">Add
+                                        Keyword</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <h3 class="text-on-pannel"><sup>*</sup>Applicability</h3>
+                            <table>
+                                <div class="control-label">
+                                    <mat-error
+                                        *ngIf="(story.applicability[0]==null || story.applicability[0]=='') && isSubmitted">
+                                        Required field *</mat-error>
+                                </div>
+                                <tr *ngFor="let key of applicabilityset; let i = index;">
+                                    <td><label class="control-label" for="applicability">Applicability {{i+1}}:</label>
+                                        <mat-form-field class="small-input-field " appearance="outline">
+                                            <mat-label>Applicability {{i+1}}</mat-label>
+                                            <input matInput id="applicability" type="text"
+                                                name="story.applicability{{i}}" #applicability="ngModel"
+                                                [(ngModel)]="story.applicability[i]">
+                                        </mat-form-field>
+                                        <mat-icon (click)="removeApplicability(i)" color="warn" style="cursor:pointer"
+                                            *ngIf="i>0">
+                                            delete
+                                        </mat-icon>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div class="row">
+                                <div class="col-sm-4 text-center form-group">
+                                    <button mat-raised-button color="primary" (click)="addApplicability()">Add
+                                        Applicability</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="col-sm-4">Answer:</label>
+                        <quill-editor [styles]="{height:'170px'}" [modules]="editorModules" name="story.response"
+                            [(ngModel)]="story.response" (onEditorChanged)="changeEditor($event)"></quill-editor>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 bg-light">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="container row submit">
+                <div class="col-sm-4">
+                </div>
+                <div *ngIf="!readonly" class="col-sm-2 form-group">
+                    <button mat-raised-button color="accent" type="submit"
+                        (click)="test(storyform.valid,storyform)">Save</button>
+                </div>
+
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

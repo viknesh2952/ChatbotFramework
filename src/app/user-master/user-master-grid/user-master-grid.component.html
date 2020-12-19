@@ -1,0 +1,32 @@
+<div class="crudmenu">
+    <button mat-raised-button color="accent" (click)="createUser()">Add User</button> 
+    <button mat-button (click)="editUser()">Edit User</button>
+    <button mat-raised-button color="warn" (click)="deleteUser()">Delete User</button>
+    <br>
+    Selected Row:<span id="selectedRows"></span>
+</div>
+    <ag-grid-angular
+    #agGrid
+    style="width: 98%; height:77%;"
+    class="ag-theme-alpine" 
+    (selectionChanged)="onSelectionChanged()"   
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    rowSelection="multiple"
+    [defaultColDef]="defaultColDef"
+    [colResizeDefault]="colResizeDefault"
+    [rowClassRules]="rowClassRules"
+    (rowSelected)="onRowSelected($event)"
+    rowMultiSelectWithClick="true"
+    (rowDoubleClicked) = "onRowDoubleClick($event)"
+    [enableRangeSelection]="true"
+    [pagination]="true"
+    [paginationAutoPageSize]="true"
+   >
+</ag-grid-angular>
+
+
+    
+    
+
+ 

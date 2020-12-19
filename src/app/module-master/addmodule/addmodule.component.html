@@ -1,0 +1,209 @@
+<div class="container">
+  <div class="float-button">
+      <button mat-raised-button (click)="back()"><mat-icon>chevron_left</mat-icon>Back</button>
+  </div>
+
+  <form #moduleform="ngForm" ngNativeValidate (ngSubmit)="test(moduleform.valid,moduleform)" class="create-form form-horizontal" novalidate>
+      <fieldset [disabled]="readonly">
+          <div class="row">
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_CODE"><sup>*</sup>Module Code:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Module Code</mat-label>
+                      <input matInput placeholder="Module Code"
+                       id="MODULE_CODE" [matAutocomplete]="auto" name="MODULE_CODE" [(ngModel)]="module.MODULE_CODE" required >
+                       <mat-autocomplete #auto="matAutocomplete" ></mat-autocomplete>
+                       <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_CODE == null && isSubmitted ">
+                              Module code is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_NAME"><sup>*</sup>Module Name:</label>
+                  <mat-form-field class="lookup " appearance="outline" >
+                      <mat-label>Module Name</mat-label>
+                      <input required matInput placeholder="Module Code" id="MODULE_NAME" name="MODULE_NAME" [matAutocomplete]="auto"
+                       [(ngModel)]="module.MODULE_NAME">
+                       <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                       <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_NAME == null && isSubmitted ">Module Name is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label class="control-label col-sm-2" for="app_id"><sup>*</sup>Product:</label>
+              <mat-form-field class="lookup" appearance="outline">
+                  <mat-label>Product</mat-label>
+                  <input matInput placeholder="Select Product"
+                   id="app_id" #app_id [matAutocomplete]="auto" name="product"
+                   [formControl]="AppCtrl" [(ngModel)]="product" required >
+                      <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let id of filteredAppId | async" [value]="id.PRODUCT_NAME">
+                          {{id.PRODUCT_CODE}} - {{id.PRODUCT_NAME}}
+                      </mat-option>
+                  </mat-autocomplete>
+                  <div class="control-label">
+                      <mat-error *ngIf="product==null && isSubmitted">Select Anyone *</mat-error>
+                  </div>
+              </mat-form-field>
+          </div>
+          <div class="col-md-6 form-group">
+            <label class="control-label col-sm-4" for="MODULE_APPLICABILITY"><sup>*</sup>Module Applicability:</label>
+            <mat-form-field class="lookup " appearance="outline">
+                <mat-label>Module Applicability</mat-label>
+                <input required matInput placeholder="Applicability" [matAutocomplete]="auto" id="MODULE_APPLICABILITY"  name="MODULE_APPLICABILITY" [(ngModel)]="module.MODULE_APPLICABILITY">
+                <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                <div class="control-label">
+                    <mat-error *ngIf="module.MODULE_APPLICABILITY == null && isSubmitted ">Module Applicability  is Mandatory *</mat-error>
+                </div>
+            </mat-form-field>
+        </div>
+
+          </div>
+          <div class="row">
+
+              <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODULE_ACTIVE_FLAG"><sup>*</sup>Module Active Status:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Active Status</mat-label>
+                        <input required matInput placeholder="Module Active Flag" id="MODULE_ACTIVE_FLAG" [matAutocomplete]="autor"
+                        [formControl]="RefDetailCtrl" [(ngModel)]="ref">
+                        <mat-autocomplete #autor="matAutocomplete">
+                        <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                            {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <div class="control-label">
+                        <mat-error *ngIf="module.ref==null && isSubmitted">Select anyone *</mat-error>
+                    </div>
+                </mat-form-field>
+                </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_ORDER_BY"><sup>*</sup>Module Order By:</label>
+                  <mat-form-field class="lookup" appearance="outline">
+                      <mat-label>Module Order By</mat-label>
+                      <input required matInput placeholder="Module Order By" id="MODULE_ORDER_BY" type="number"
+                      [matAutocomplete]="auto"  name="MODULE_ORDER_BY" [(ngModel)]="module.MODULE_ORDER_BY">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_ORDER_BY == null && isSubmitted ">Module Order By is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+
+
+          </div>
+          <div class="row">
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_PAGE"><sup>*</sup>Module Page :</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Module Page</mat-label>
+                      <input required matInput  placeholder="Module Page  " id="MODULE_PAGE" name="MODULE_PAGE"
+                      [(ngModel)]="module.MODULE_PAGE" [matAutocomplete]="auto" >
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                       <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_PAGE == null && isSubmitted ">Module Pageis Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_PATH"><sup>*</sup>Module path:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Module Path</mat-label>
+                      <input required matInput  placeholder="module Path" id="MODULE_PATH" name="MODULE_PATH" [(ngModel)]="module.MODULE_PATH"
+                      [matAutocomplete]="auto">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <div class="control-label">
+                        <mat-error *ngIf="module.MODULE_PATH == null && isSubmitted ">Module Path is Mandatory *</mat-error>
+                    </div>
+                  </mat-form-field>
+              </div>
+
+
+          </div>
+          <div class="row">
+
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_ICON"><sup>*</sup>Module Icon:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Module Icon</mat-label>
+                      <input required matInput id="MODULE_ICON" name="MODULE_ICON" [(ngModel)]="module.MODULE_ICON">
+                      <div class="control-label">
+                        <mat-error *ngIf="module.MODULE_ICON == null && isSubmitted ">Module Icon is Mandatory *</mat-error>
+                    </div>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_PASSWORD_REQUIRED"><sup>*</sup>Module Password:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label>Module Password</mat-label>
+                      <input required matInput placeholder="Password" [matAutocomplete]="auto" id="MODULE_PASSWORD_REQUIRED"   name="MODULE_PASSWORD_REQUIRED" [(ngModel)]="module.MODULE_PASSWORD_REQUIRED">
+                      <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                      <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_PASSWORD_REQUIRED == null && isSubmitted ">Password  is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+
+            <div class="col-md-6 form-group">
+              <label class="control-label col-sm-4" for="MODULE_PREFIX"><sup>*</sup>Module Prefix:</label>
+              <mat-form-field class="lookup " appearance="outline">
+                  <mat-label>Module Prefix</mat-label>
+                  <input required matInput placeholder="module prefix" [matAutocomplete]="auto" id="MODULE_PREFIX"   name="MODULE_PREFIX" [(ngModel)]="module.MODULE_PREFIX">
+                  <mat-autocomplete #auto="matAutocomplete"></mat-autocomplete>
+                  <div class="control-label">
+                      <mat-error *ngIf="module.MODULE_PREFIX == null && isSubmitted ">Module Order  is Mandatory *</mat-error>
+                  </div>
+              </mat-form-field>
+          </div>
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_ACTIVE_FROM "><sup>*</sup>Module Active From:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label> Active From</mat-label>
+                      <input required matInput [min]="min" placeholder="Active from" [matDatepicker]="picker" id="MODULE_ACTIVE_FROM" name="MODULE_ACTIVE_FROM" [(ngModel)]="module.MODULE_ACTIVE_FROM">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker></mat-datepicker>
+                      <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_ACTIVE_FROM == null && isSubmitted ">Active from is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+          </div>
+
+
+          <div class="row">
+
+              <div class="col-md-6 form-group">
+                  <label class="control-label col-sm-4" for="MODULE_ACTIVE_TO "><sup>*</sup>Module Active To:</label>
+                  <mat-form-field class="lookup " appearance="outline">
+                      <mat-label> Active To</mat-label>
+                      <input required matInput [min]="min" placeholder="Active to" [matDatepicker]="picker1" id="MODULE_ACTIVE_TO" name="MODULE_ACTIVE_TO" [(ngModel)]="module.MODULE_ACTIVE_TO">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker1></mat-datepicker>
+                      <div class="control-label">
+                          <mat-error *ngIf="module.MODULE_ACTIVE_TO == null && isSubmitted ">Active To is Mandatory *</mat-error>
+                      </div>
+                  </mat-form-field>
+              </div>
+
+
+          </div>
+
+          <div class="container row">
+              <div class="col-sm-4 form-group">
+                  <button mat-raised-button color="accent" type="submit" (click)="test(moduleform.valid,moduleform)">Save</button>
+              </div>
+              <div class="col-sm-4 form-group">
+                  <button mat-raised-button color="warn" (click)="back()">Close</button>
+              </div>
+          </div>
+      </fieldset>
+  </form>
+</div>

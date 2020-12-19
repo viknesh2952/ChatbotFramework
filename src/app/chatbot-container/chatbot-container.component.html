@@ -1,0 +1,39 @@
+<div class="row container-panel">
+    <div class="col-sm-3">
+    <button class="btn btn-lg btn-outline-primary add" (click)="open(content)"><span class="material-icons">
+        library_add
+    </span>  Add Container</button>
+</div>
+    <div class="col-sm-3">
+        <button mat-raised-button>
+            <span class="material-icons">
+                account_tree</span>    
+                E-R Diagram
+        </button>
+    </div>
+    <div class="col-sm-3">
+        <button mat-raised-button color="primary">
+            <span class="material-icons">
+                visibility 
+            </span> Preview</button>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Container</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>
+          Try the code inside this div
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div>
+  </ng-template>
+  
+  

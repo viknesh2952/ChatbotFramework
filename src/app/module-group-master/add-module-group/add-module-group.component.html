@@ -1,0 +1,142 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button> 
+    </div> 
+    <form #modgrpform="ngForm" class="create-form form-horizontal" (ngSubmit)="test(modgrpform.valid,modgrpform)"
+        novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODGRP_CODE"><sup>*</sup>Code:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="MODGRP_CODE" name="modgrp.MODGRP_CODE" [(ngModel)]="modgrp.MODGRP_CODE"
+                            #MODGRP_CODE="ngModel" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="modgrp.MODGRP_CODE==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODGRP_NAME"><sup>*</sup>Name:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="MODGRP_NAME" name="modgrp.MODGRP_NAME" [(ngModel)]="modgrp.MODGRP_NAME"
+                            required>
+                        <div class="control-label">
+                            <mat-error *ngIf="modgrp.MODGRP_NAME==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">                
+                    <div class="col-md-6 form-group">
+                        <label class="control-label col-sm-2" for="app_id"><sup>*</sup>Product:</label>
+                        <mat-form-field class="lookup" appearance="outline">
+                            <mat-label>Product</mat-label>
+                            <input matInput placeholder="Select Product"
+                             id="app_id" #app_id [matAutocomplete]="auto" name="product" 
+                             [formControl]="AppCtrl" [(ngModel)]="product" required >
+                                <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let id of filteredAppId | async" [value]="id.PRODUCT_NAME">
+                                    {{id.PRODUCT_CODE}} - {{id.PRODUCT_NAME}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <div class="control-label">
+                                <mat-error *ngIf="product==null && isSubmitted">Select Anyone *</mat-error>
+                            </div>
+                        </mat-form-field>
+                    </div> 
+            
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="active"><sup>*</sup>Active Flag:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Active Flag</mat-label>
+                        <input matInput placeholder="Active Flag" id="active" [formControl]="RefDetailCtrl"
+                            [matAutocomplete]="autor" name="ref" [(ngModel)]="ref" required>
+                        <mat-autocomplete #autor="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                                {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="ref==null && isSubmitted">Select anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODGRP_ACTIVE_FROM"><sup>*</sup>Active From:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput [matDatepicker]="picker" id="MODGRP_ACTIVE_FROM"  name="MODGRP_ACTIVE_FROM" 
+                            [(ngModel)]="MODGRP_ACTIVE_FROM" #from="ngModel" maxlength="10" (dateInput)="isValidDate(MODGRP_ACTIVE_FROM,1)" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && from.valid==false && from.pristine==true">Required field *</mat-error>
+                            <mat-error *ngIf="!fromvalid && from.dirty==true">Invalid date</mat-error>
+                            <mat-error *ngIf="id==0 && from_past && chkpastcall(1)">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODGRP_ACTIVE_TO"><sup>*</sup>Active To:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput  [matDatepicker]="picker1" id="MODGRP_ACTIVE_TO"  name="MODGRP_ACTIVE_TO"
+                            [(ngModel)]="MODGRP_ACTIVE_TO" #to="ngModel" maxlength="10" (dateInput)="isValidDate(MODGRP_ACTIVE_TO,2)" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker1></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && to.valid==false && to.pristine==true">Required field * </mat-error>
+                            <mat-error *ngIf="MODGRP_ACTIVE_TO!=null && MODGRP_ACTIVE_TO!=null && !activeTo()">Active To date should be greater than Active from</mat-error>
+                            <mat-error *ngIf="!tovalid && to.dirty==true">Invalid Date</mat-error>
+                            <mat-error *ngIf="id==0 && to_past && chkpastcall(2)">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODGRP_ORDER_BY"><sup>*</sup>Order :</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="MODGRP_ORDER_BY" type="number" placeholder="number" name="modgrp.MODGRP_ORDER_BY"
+                            [(ngModel)]="modgrp.MODGRP_ORDER_BY" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="modgrp.MODGRP_ORDER_BY==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="MODGRP_APPLICABILITY"><sup>*</sup>Applicability:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="MODGRP_APPLICABILITY" name="modgrp.MODGRP_APPLICABILITY"
+                            [(ngModel)]="modgrp.MODGRP_APPLICABILITY" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="modgrp.MODGRP_APPLICABILITY==null && isSubmitted">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </fieldset>
+            <div class="container row submit">
+                <div class="col-sm-4">
+                </div>
+                <div *ngIf="!readonly" class="col-sm-2 form-group">
+                    <button mat-raised-button color="accent" type="submit" 
+                        (click)="test(modgrpform.valid,modgrpform)">Save</button>
+                </div>
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+    </form>
+</div>

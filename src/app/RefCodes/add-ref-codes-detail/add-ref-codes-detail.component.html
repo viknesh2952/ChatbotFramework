@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #refdetailform="ngForm" class="create-form form-horizontal" (ngSubmit)="test(refdetailform.valid,refdetailform)"
+        novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCD_ABBREVIATION"><sup>*</sup>Abbreviation :</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="RCD_ABBREVIATION" name="refheader.RCD_ABBREVIATION" [(ngModel)]="refdetail.RCD_ABBREVIATION"
+                             required>
+                        <div class="control-label">
+                            <mat-error *ngIf="refdetail.RCD_ABBREVIATION==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCD_MEANING"><sup>*</sup>Meaning :</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="RCD_MEANING" name="refdetail.RCD_MEANING" [(ngModel)]="refdetail.RCD_MEANING"
+                            required>
+                        <div class="control-label">
+                            <mat-error *ngIf="refdetail.RCD_MEANING==null && isSubmitted">Required field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">                
+                    <div class="col-md-6 form-group">
+                        <label class="control-label col-sm-3" for="RCD_VALUE"><sup>*</sup>Value :</label>
+                        <mat-form-field class="lookup" appearance="outline">
+                            <mat-label>Value</mat-label>
+                            <input matInput placeholder="Value"
+                             id="RCD_VALUE" name="refdetail.RCD_VALUE" [(ngModel)]="refdetail.RCD_VALUE" required >
+                            <div class="control-label">
+                                <mat-error *ngIf="refdetail.RCD_VALUE==null && isSubmitted">Required Field *</mat-error>
+                            </div>
+                        </mat-form-field>
+                    </div> 
+            
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCD_SET_AS_DEFAULT"><sup>*</sup>Set As Default:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Select Anyone</mat-label>
+                        <mat-select [(ngModel)]="refdetail.RCD_SET_AS_DEFAULT" id="RCD_SET_AS_DEFAULT" name="refdetail.RCD_SET_AS_DEFAULT" [disabled]="readonly">
+                            <mat-option *ngFor="let item of default_list" [value]="item.value">
+                                {{item.viewValue}}
+                            </mat-option>
+                        </mat-select>    
+                        <div class="control-label">
+                            <mat-error *ngIf="refdetail.RCD_SET_AS_DEFAULT==null && isSubmitted">Select Anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCD_HIGH_RANGE"><sup>*</sup>High Range:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>High Range</mat-label>
+                        <input matInput type="number" placeholder="Number" id="RCD_HIGH_RANGE" name="refdetail.RCD_HIGH_RANGE" [(ngModel)]="refdetail.RCD_HIGH_RANGE" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="refdetail.RCD_HIGH_RANGE==null && isSubmitted">Required Field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCD_LOW_RANGE"><sup>*</sup>Low Range:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Low Range</mat-label>
+                        <input matInput type="number" placeholder="Number" id="RCD_LOW_RANGE" name="refdetail.RCD_LOW_RANGE" [(ngModel)]="refdetail.RCD_LOW_RANGE" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="refdetail.RCD_LOW_RANGE==null && isSubmitted">Required Field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class=row>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCD_ORDER_BY"><sup>*</sup>Order By:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Order</mat-label>
+                        <input matInput type="number" placeholder="Number" id="RCD_ORDER_BY" name="refdetail.RCD_ORDER_BY" [(ngModel)]="refdetail.RCD_ORDER_BY" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="refdetail.RCD_ORDER_BY==null && isSubmitted">Required Field *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </fieldset>
+            <div class="container row submit">
+                <div class="col-sm-4"></div>
+                <div *ngIf="!readonly" class="col-sm-2 form-group">
+                    <button mat-raised-button color="accent" type="submit" 
+                        (click)="test(refdetailform.valid,refdetailform)">Save</button>
+                </div>
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+    </form>
+</div>

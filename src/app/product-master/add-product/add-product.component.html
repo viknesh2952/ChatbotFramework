@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #productform="ngForm" class="create-form form-horizontal" (ngSubmit)="test(productform.valid,productform)"
+        novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="PRODUCT_CODE"><sup>*</sup>Product Code:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Product Code</mat-label>
+                        <input matInput id="PRODUCT_CODE" type="text" name="PRODUCT_CODE" 
+                            [(ngModel)]="product.PRODUCT_CODE" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="product.PRODUCT_CODE==null && isSubmitted">Required field *</mat-error>
+                                <mat-error *ngIf="chkExistingProduct(product.PRODUCT_CODE)">Don't Enter Existing Product Code</mat-error>
+                            </div>    
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="PRODUCT_NAME"><sup>*</sup>Product Name:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Product Name</mat-label>
+                        <input matInput id="PRODUCT_NAME" type="text" name="PRODUCT_NAME"
+                            [(ngModel)]="product.PRODUCT_NAME" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="product.PRODUCT_NAME==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label class="control-label col-sm-2" for="PRODUCT_PURPOSE"><sup>*</sup>Product Purpose:</label>
+                    <mat-form-field class="long-input-field" appearance="outline">
+                        <mat-label>Product Purpose</mat-label>
+                        <input matInput placeholder="Product Purpose" id="PRODUCT_PURPOSE" name="PRODUCT_PURPOSE"
+                            [(ngModel)]="product.PRODUCT_PURPOSE">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="PRODUCT_ACTIVE_FLAG"><sup>*</sup>Active Flag:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Active Flag</mat-label>
+                        <input matInput placeholder="Active Flag" id="PRODUCT_ACTIVE_FLAG" name="ref"
+                            [formControl]="RefDetailCtrl" [matAutocomplete]="autor" [(ngModel)]="ref" required>
+                        <mat-autocomplete #autor="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                                {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="ref==null && isSubmitted">Select anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                    <div class="col-md-6 form-group">
+                        <label class="control-label col-sm-4" for="PRODUCT_ORDER_BY"><sup>*</sup>Order:</label>
+                        <mat-form-field class="lookup" appearance="outline">
+                            <mat-label>Order</mat-label>
+                            <input matInput id="PRODUCT_ORDER_BY" type="number" placeholder="number" name="PRODUCT_ORDER_BY"
+                                [(ngModel)]="product.PRODUCT_ORDER_BY" required>
+                                <div class="control-label">
+                                    <mat-error *ngIf="product.PRODUCT_ORDER_BY==null && isSubmitted">Required field *
+                                    </mat-error>
+                                </div>
+                        </mat-form-field>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="PRODUCT_ACTIVE_FROM"><sup>*</sup>Active From:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput  [matDatepicker]="picker1" id="PRODUCT_ACTIVE_FROM" name="PRODUCT_ACTIVE_FROM" 
+                            [(ngModel)]="PRODUCT_ACTIVE_FROM" #from="ngModel" maxlength="10" (dateInput)="isValidDate(PRODUCT_ACTIVE_FROM,1)" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker1></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && from.valid==false && from.pristine==true">Required field *</mat-error>
+                            <mat-error *ngIf="!fromvalid && from.dirty==true">Invalid date</mat-error>
+                            <mat-error *ngIf="id==0 && from_past && chkpastcall(1)">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                  </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="PRODUCT_ACTIVE_TO"><sup>*</sup>Active To:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>YYYY-MM-DD</mat-label>
+                        <input matInput  [matDatepicker]="picker2" id="PRODUCT_ACTIVE_TO" name="PRODUCT_ACTIVE_TO" 
+                            [(ngModel)]="PRODUCT_ACTIVE_TO" #to="ngModel" maxlength="10" (dateInput)="isValidDate(PRODUCT_ACTIVE_TO,2)" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker2></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && to.valid==false && to.pristine==true">Required field * </mat-error>
+                            <mat-error *ngIf="PRODUCT_ACTIVE_FROM!=null && PRODUCT_ACTIVE_TO!=null && !activeTo()">Active To date should be greater than Active from</mat-error>
+                            <mat-error *ngIf="!tovalid && to.dirty==true">Invalid Date</mat-error>
+                            <mat-error *ngIf="id==0 && to_past && chkpastcall(2)">Don't Enter Past date</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </fieldset>
+            <div class="container row submit">
+                <div class="col-sm-4">
+                </div>
+                <div *ngIf="!readonly" class="col-sm-2 form-group">
+                    <button mat-raised-button color="accent" type="submit" 
+                        (click)="test(productform.valid,productform)">Save</button>
+                </div>
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="this.id!=0">
+                <div class="col-sm-12 form-group">
+                    <label class="control-label col-sm-2" for="PRODUCT_DEPLOYED_URL">Deployed URL:</label>
+                    <mat-form-field class="long-input-field" appearance="outline">
+                        <mat-label>Deployed URL</mat-label>
+                        <input matInput placeholder="Product Deployed URL" id="PRODUCT_DEPLOYED_URL" name="PRODUCT_DEPLOYED_URL"
+                            [(ngModel)]="product.PRODUCT_DEPLOYED_URL" #userinput readonly>
+                            <button mat-raised-button matSuffix id="copyicon" (click)="copyInputMessage(userinput)">
+                                <span class="material-icons">
+                                    content_copy
+                                </span>copy
+                            </button>
+                        </mat-form-field>
+                    
+                </div>
+            </div>
+    </form>
+</div>

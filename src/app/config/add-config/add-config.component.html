@@ -1,0 +1,48 @@
+<div class="container-fluid">
+   <form #configform="ngForm" ngNativeValidate (ngSubmit)="addtoApi(configform)" class="create-form">
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-5 form-group">
+                    <label class="control-label col-sm-4" for="app_id">App Id:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>App Id</mat-label>
+                        <input matInput id="app_id" name="app_id" [(ngModel)]="config.app_id">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label class="control-label col-sm-4" for="Config_name">Config Name:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>Config Name</mat-label>
+                        <input matInput id="Config_name" name="Config_name" [(ngModel)]="config.config_name">
+                    </mat-form-field>
+                </div>
+            </div>
+                <!--<input type="text" name="user_id" [(ngModel)]="user_id" style="display:none;">-->
+            <div class="row">
+                <div class="col-md-5 form-group">
+                    <label class="control-label col-sm-4" for="config_value">Config Value:</label>
+                    <mat-form-field class="small-input-field " appearance="outline">
+                        <mat-label>Config Value</mat-label>
+                        <input matInput id="config_value" type="number" name="config_value" [(ngModel)]="config.config_value">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label class="control-label col-sm-2" for="config_order">Config Order:</label>
+                    <mat-form-field class="small-input-field " appearance="fill">
+                        <mat-label>Config Order</mat-label>
+                        <input matInput id="config_order" type="number" name="config_order" [(ngModel)]="config.config_order">
+                    </mat-form-field>
+                </div>
+            </div> 
+                        
+            <div class="container row">
+                <div class="col-sm-4 form-group">
+                    <button mat-raised-button color="accent" type="submit" (click)="addtoApi(configform)">Save</button>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

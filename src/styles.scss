@@ -1,0 +1,537 @@
+/*for grid in Story Master*/
+@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+.ag-theme-alpine {
+    @include ag-theme-alpine((
+        odd-row-background-color: #f4f7f8
+    ));
+}
+html {
+	height: 100%;
+}
+@media screen and (min-width: 100px) {
+#jk
+{
+	margin-top:25px;
+	position: absolute;
+	z-index: 108;
+	margin-left: 50px;
+	margin-top: 50px;
+	color: white;
+	font-weight: 500;
+	font-size: 18px;
+}
+}
+@media screen and (min-width: 200px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 100px;
+		margin-top: 50px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 300px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 150px;
+		margin-top: 50px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 400px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 200px;
+		color: white;
+		margin-top: 50px;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 500px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 250px;
+		margin-top: 50px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 600px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 300px;
+		margin-top: 50px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 700px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-top: 50px;
+		margin-left: 350px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 800px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 400px;
+		color: white;
+		margin-top: 50px;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 900px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 450px;
+		color: white;
+		font-weight: 450;
+		margin-top: 50px;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1000px) {
+	#jk
+	{
+		margin-top:25px;
+		position: absolute;
+		z-index: 108;
+		margin-left: 500px;
+		color: white;
+		font-weight: 500;
+		margin-top: 50px;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1100px) {
+	#jk
+	{
+	
+		position: absolute;
+		z-index: 108;
+		margin-left: 550px;
+		color: white;
+		margin-top: 50px;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1200px) {
+	#jk
+	{
+		
+		position: absolute;
+		z-index: 108;
+		margin-left: 600px;
+		color: white;		
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1300px) {
+	#jk
+	{
+		
+		position: absolute;
+		z-index: 108;
+		margin-left: 650px;
+		color: white;
+		
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1400px) {
+	#jk
+	{
+		
+		position: absolute;
+		z-index: 108;
+		margin-left: 700px;
+		color: white;
+		
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1500px) {
+	#jk
+	{
+		
+		position: absolute;
+		z-index: 108;
+		margin-left: 750px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+@media screen and (min-width: 1600px) {
+	#jk
+	{
+		
+		position: absolute;
+		z-index: 108;
+		margin-left: 800px;
+		color: white;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+.example-sidenav{
+	margin-top: 75px;
+}
+.crudmenu{
+	margin-top: 75px;
+}
+body {
+	height: 100%;
+	width:100%;
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+/*for main page header*/
+.header-card {
+	width: 100%;
+	top:0px;
+	z-index:10;	
+  .header-logo{  background-image: url('assets/tvslsl.jpg');
+	background-size: cover;
+	width:80px;
+	height:80px;
+	}
+	.mat-card-title{
+		 color:rgb(7, 77, 184);
+	}
+  .mat-card-image {
+	widows: 1200px;
+	height:130px;
+	background-size: cover;
+  }
+}
+/*for header toolbar */
+header{
+	.mat-toolbar.mat-primary {
+		background: #05478f;
+		color: white;
+		height: 80px;
+		position:fixed !important;
+		top:0px;
+		width:100%;
+		z-index:10;
+	}
+}
+.mr {
+    margin-right: 5px;
+}
+@media screen and (min-width: 601px) {
+	.menu-name {
+	  font-size: 22px;
+	}
+	#small-logo{
+		height: 65px;
+		width: 65px;
+		border-radius:50%;
+		margin:3px;
+	}
+	
+
+  }
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 600px) {
+	.menu-name {
+	  font-size: 13px;
+	}
+	#small-logo{
+		height: 45px;
+		width: 45px;
+		border-radius:50%;
+		margin:3px;
+	}
+	#menu-icon{
+		margin-left:-15px;
+	}
+	
+  }
+/*for login form*/
+.login-card {
+	max-width: 500px;
+	position: relative;
+	float:right;
+	padding: 40px;
+//	background-color: rgb(174, 243, 255);
+background-color: rgb(162, 252, 225);
+	margin: 50px;
+	width: 250px;
+	color: rgb(8, 18, 163);
+	border: 1px solid black;
+	box-shadow: 2px 3px 3px black;
+	&:hover {
+		border: 2px solid rgb(4, 4, 233);
+	}
+}
+.example-header-image {
+	background-image: url('assets/user.jpg');
+	background-size: cover;
+ }
+/*for side nav*/
+.mat-sidenav{
+	height:88%;
+}
+/*borderless icons*/
+.mat-icon:focus{
+	border:none;
+	outline:0;
+}
+.mat-button:focus{
+	border:none;
+	outline:0;
+}
+.mat-button-wrapper:focus{
+	border:none;
+	outline:0;
+}
+.borderless:focus{
+	border:none;
+	outline:0;
+}
+.mat-form-field-prefix .mat-icon-button, .mat-form-field-suffix .mat-icon-button {
+height: 1.5em;
+width: 1.5em;
+border:none;
+	outline:0;
+}
+
+.mat-sidenav-content {
+	padding:15px 10px 0px 10px;
+	display: flex;
+	.main-content{
+		margin-top:75px;
+		height: 88%;
+	}	
+	align-items: center;
+	justify-content: center;
+}
+  .menu-button {
+	transition: 300ms ease-in-out;
+	transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+	transform: rotate(180deg);
+  }
+  .submenu {
+	overflow-y: hidden;
+	transition: transform 300ms ease;
+	transform: scaleY(0);
+	transform-origin: top;
+	padding-left: 30px;
+  }
+  .submenu.expanded {
+	transform: scaleY(1);
+  }
+
+/*add update delete section*/  
+.crudmenu{
+	.mat-button {
+	background-color: royalblue;
+	margin: 10px;
+	text-align: center;
+	margin:5px;
+	color:white;
+	}
+position: sticky;
+top: 0;
+z-index:1;
+background-color:white;
+}
+
+/*input fields*/
+.mat-form-field-wrapper {
+    padding-bottom: 0.5em;
+}
+.mat-form-field-appearance-outline .mat-form-field-infix {
+	padding: 0.8em 0 1.8em 0;
+	font-size: small;
+}
+.mat-error{
+	font-size:smaller;
+}
+.mat-form-field-infix {
+    height: 30px;
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+}
+.form-group {
+	margin: 0rem;
+}
+.small-input-field {
+	width:270px !important;
+	float:right;
+}
+.lookup{
+	width:65% !important;
+	float:right;
+}
+.long-input-field {
+	.mat-form-field{
+		width:100% !important;
+	}
+	float: right;
+	width:83%;
+}
+sup{
+	color:red;
+}
+.row{
+	.control-label{
+		color:darkblue;
+		display: block;
+		float: left;
+		padding: 15px;
+	}
+	margin-bottom:-20px;
+ }
+ .float-button {
+	position: fixed;
+	top: 90px;
+	right: 10px;
+	z-index:2;
+	.mat-raised-button{
+		padding-left:0px;
+		background-color: azure;
+	}
+}
+/*deleted row in ag-grid*/
+.deleted-row {
+	background-color: rgb(252, 200, 186) !important;
+}  
+.waiting-for-approval{
+	background-color: rgb(202, 243, 255) !important;
+}
+/*for fieldset*/
+.text-on-pannel {
+	background-color: white;
+	color:blue;
+	height: auto;
+	margin-left: 15px;
+	font-size: medium;
+	padding: 3px 5px;
+	position: absolute;
+	margin-top: -17px;
+	border: 1px solid #337ab7;
+	border-radius: 8px;
+  }
+  
+  .panel {
+	/* for text on pannel */
+	margin-top: 8px !important;
+	margin-bottom:5px !important;
+  }
+  
+  .panel-body {
+		padding:0px 20px 10px;
+		border:1px solid blueviolet;
+		.mat-form-field{
+			float:left;
+			margin-left:50px;
+		}
+		.mat-icon{
+			float:right;
+			margin-left:15px;
+			margin-top:15px;
+		}
+		.question{
+			.mat-form-field{
+				width:80%;
+			}
+			width:100%;
+		  }
+	    .control-label{
+			padding:5px;
+		}
+	}	  
+//submit and save button in ADD modules
+.submit{
+	margin:40px;
+}
+//to hide ag grid watermark
+.ag-watermark {
+	visibility: hidden;
+	// position: absolute;
+    // bottom: 10px;
+    // right: 25px;
+    // opacity: 0.1;
+    // transition: opacity 1s ease-out 3s;
+}
+//to display pagination in grid
+@media screen and (min-width: 800px) {
+.ag-paging-panel {
+	align-items: center;
+	padding-left:40%;
+    display: flex;
+    justify-content: flex-start;
+}
+}
+//ChatbotContainer menu panel
+.container-panel{
+	padding-top:30px;
+	.add{
+		.material-icons{
+			padding-top:5px;
+		}
+		padding: 0.1rem 1rem;
+		margin-left:20px;
+		box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+	}
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+.api_button{
+	margin:10px;
+	button{
+		margin:10px;
+	}
+}
+.modal_button{
+	margin-left:-20px;
+	margin-top:5px;
+}

@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="float-button">
+    <button mat-raised-button (click)="back()"><mat-icon>chevron_left</mat-icon>Back</button>
+    </div>
+    <form #roleform="ngForm" ngNativeValidate (ngSubmit)="test(roleform.valid,roleform)" class="create-form form-horizontal">
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_code">Role Code:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role code</mat-label>
+                        <input matInput placeholder="Role Code"
+                         id="role_code" [matAutocomplete]="auto" name="role_code" [(ngModel)]="role.role_code" required >
+                         <mat-autocomplete #auto="matAutocomplete" ></mat-autocomplete>
+                         <div class="control-label">
+                            <mat-error *ngIf="role.role_code == null && isSubmitted ">Role Code is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_description">Role description:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role description</mat-label>
+                        <input matInput placeholder="Role Description" required  [matAutocomplete]="auto" id="role_description" name="role_description" [(ngModel)]="role.role_description">
+                        <mat-autocomplete #auto="matAutocomplete" ></mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="role.role_description == null && isSubmitted ">Role Description is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_active_status ">Role Active Status:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role Active Status</mat-label>
+                        <input required matInput  placeholder="Role Active Status" id="role_active_status" [matAutocomplete]="autor"
+                        [formControl]="RefDetailCtrl" [(ngModel)]="ref">
+                        <mat-autocomplete #autor="matAutocomplete">
+                        <mat-option *ngFor="let id of filteredRefDetail | async" [value]="id.RCD_ABBREVIATION">
+                            {{id.RCD_MEANING}} - {{id.RCD_ABBREVIATION}}
+                        </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="role.ref==null && isSubmitted">Select anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                 <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_active_from ">Role Active From:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role Active From</mat-label>
+                        <input required matInput  [min]="min" placeholder="Role Active from" [matDatepicker]="picker" id="role_active_from" name="role_active_from" [(ngModel)]="role.role_active_from">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="role.role_active_from == null && isSubmitted ">Active From is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_active_to">Role Active To:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role Active To</mat-label>
+                        <input required matInput  [min]="min" placeholder="Role Actice to" [matDatepicker]="picker1" id="role_active_to" name="role_active_to" [(ngModel)]="role.role_active_to">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker1></mat-datepicker>
+                        <div class="control-label">
+                            <mat-error *ngIf="role.role_active_to == null && isSubmitted ">Active To is Mandatory *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_lock_key">Role Lock Key:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role Lock Key</mat-label>
+                        <input matInput id="role_lock_key" type="number" name="role_lock_key" [(ngModel)]="role.role_lock_key">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="role_profile_key">Role Profile Key:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Role Profile Key</mat-label>
+                        <input matInput id="role_profile_key"  type="number" name="role_profile_key" [(ngModel)]="role.role_profile_key">
+                    </mat-form-field>
+                </div>
+
+
+            </div> -->
+
+
+            <div class="container row">
+                <div class="col-sm-4 form-group">
+                    <button  mat-raised-button color="accent" type="submit" (click)="test(roleform.valid,roleform)">Save</button>
+                </div>
+                <div class="col-sm-4 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+            </fieldset>
+        </form>
+    </div>

@@ -1,0 +1,28 @@
+<div class="crudmenu">
+    <button mat-button (click)="approve()">Approve</button>
+    <button mat-raised-button color="warn" (click)="reject()">Reject</button>
+    <br>
+    Please check a row to approve or reject!
+    <br>
+    Selected Row:<span id="selectedRows"></span>
+</div>
+    <ag-grid-angular
+    #agGrid
+    style="width: 98%; height:85%;"
+    class="ag-theme-alpine" 
+    (selectionChanged)="onSelectionChanged()"   
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [rowClassRules]="rowClassRules"
+    
+    rowSelection="multiple"
+    (rowSelected)="onRowSelected($event)"
+    rowMultiSelectWithClick="true"
+
+    [defaultColDef]="defaultColDef"
+    [colResizeDefault]="colResizeDefault"
+    (rowDoubleClicked) = "onRowDoubleClick($event)"
+    [enableRangeSelection]="true"
+    [pagination]="true"
+    [paginationAutoPageSize]="true">
+</ag-grid-angular>

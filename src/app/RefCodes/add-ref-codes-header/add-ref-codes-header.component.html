@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #refheaderform="ngForm" class="create-form form-horizontal"
+        (ngSubmit)="test(refheaderform.valid,refheaderform)" novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCH_DESCRIPTION"><sup>*</sup>Description :</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="RCH_DESCRIPTION" name="refheader.RCH_DESCRIPTION"
+                            [(ngModel)]="refheader.RCH_DESCRIPTION" #RCH_DESCRIPTION="ngModel" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && refheader.RCH_DESCRIPTION==null">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="RCH_DOMAIN_NAME"><sup>*</sup>Domain Name:</label>
+                    <mat-form-field class="lookup " appearance="outline">
+                        <mat-label>Required field</mat-label>
+                        <input matInput id="RCH_DOMAIN_NAME" name="refheader.RCH_DOMAIN_NAME"
+                            [(ngModel)]="refheader.RCH_DOMAIN_NAME" required>
+                        <div class="control-label">
+                            <mat-error *ngIf="isSubmitted && refheader.RCH_DOMAIN_NAME==null">Required field *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-3" for="RCH_DOMAIN_TYPE"><sup>*</sup>Domain Type:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Select Domain Type</mat-label>
+                        <mat-select [(ngModel)]="refheader.RCH_DOMAIN_TYPE" id="RCH_DOMAIN_TYPE"
+                            name="refheader.RCH_DOMAIN_TYPE" [disabled]="readonly">
+                            <mat-option *ngFor="let item of Domain_type" [value]="item.value">
+                                {{item.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                        <div class="control-label">
+                            <mat-error *ngIf="refheader.RCH_DOMAIN_TYPE==null && isSubmitted">Select Anyone *
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-2" for="app_id"><sup>*</sup>Product:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Product</mat-label>
+                        <input matInput placeholder="Select Product" id="app_id" #app_id [matAutocomplete]="auto"
+                            name="product" [formControl]="AppCtrl" [(ngModel)]="product" (blur)="callModule(app_id.value)" required>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredAppId | async" [value]="id.PRODUCT_NAME">
+                                {{id.PRODUCT_CODE}} - {{id.PRODUCT_NAME}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="product==null && isSubmitted">Select Anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="module_id"><sup>*</sup>Module:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Module</mat-label>
+                        <input matInput placeholder="Select ModuleId" #moduleid id="module_id" [matAutocomplete]="autom"
+                            [formControl]="ModuleCtrl" [(ngModel)]="module" required>
+                        <mat-autocomplete #autom="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredModuleId | async" [value]="id.MODULE_NAME">
+                                {{id.MODULE_CODE}} - {{id.MODULE_NAME}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="module==null && isSubmitted">Required field *
+                                (if None enter 0)</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+</fieldset>
+<div class="container row submit">
+    <div class="col-sm-4"></div>
+    <div *ngIf="!readonly" class="col-sm-2 form-group">
+        <button mat-raised-button color="accent" type="submit"
+            (click)="test(refheaderform.valid,refheaderform)">Save</button>
+    </div>
+    <div class="col-sm-2 form-group">
+        <button mat-raised-button color="warn" (click)="back()">Close</button>
+    </div>
+</div>
+</form>
+</div>

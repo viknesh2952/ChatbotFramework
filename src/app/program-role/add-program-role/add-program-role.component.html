@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="float-button">
+        <button mat-raised-button (click)="back()">
+            <mat-icon>chevron_left</mat-icon>Back
+        </button>
+    </div>
+    <form #programroleform="ngForm" class="create-form form-horizontal" (ngSubmit)="test(programroleform.valid,programroleform)"
+        novalidate>
+        <fieldset [disabled]="readonly">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-4" for="prro_access_control"><sup>*</sup>Access Control:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Access Control</mat-label>
+                        <input matInput id="prro_access_control" type="number" name="prro_access_control"
+                        placeholder="number" [(ngModel)]="prole.prro_access_control" required>
+                            <div class="control-label">
+                                <mat-error *ngIf="prole.prro_access_control==null && isSubmitted">Required field *
+                                </mat-error>
+                            </div>    
+                    </mat-form-field>
+                </div>
+                    <div class="col-md-6 form-group">
+                        <label class="control-label col-sm-2" for="program"><sup>*</sup>Program:</label>
+                        <mat-form-field class="lookup" appearance="outline">
+                            <mat-label>Program</mat-label>
+                            <input matInput placeholder="Select Program"
+                             id="Program"  [matAutocomplete]="auto1" name="program"
+                             [formControl]="ProgramCtrl" [(ngModel)]="program" required >
+                                <mat-autocomplete #auto1="matAutocomplete">
+                                <mat-option *ngFor="let id of filteredProgramId | async" [value]="id.program_description">
+                                    {{id.program_code}} - {{id.program_description}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <div class="control-label">
+                                <mat-error *ngIf="program==null && isSubmitted">Select Anyone *</mat-error>
+                            </div>
+                        </mat-form-field>
+                    </div> 
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label col-sm-2" for="role"><sup>*</sup>Role:</label>
+                    <mat-form-field class="lookup" appearance="outline">
+                        <mat-label>Role</mat-label>
+                        <input matInput placeholder="Select Role"
+                         id="role"  [matAutocomplete]="auto" name="role"
+                         [formControl]="RoleCtrl" [(ngModel)]="role" required >
+                            <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let id of filteredRoleId | async" [value]="id.role_description">
+                                {{id.role_code}} - {{id.role_description}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <div class="control-label">
+                            <mat-error *ngIf="role==null && isSubmitted">Select Anyone *</mat-error>
+                        </div>
+                    </mat-form-field>
+                </div> 
+            </div>
+        </fieldset>
+            <div class="container row submit">
+                <div class="col-sm-4">
+                </div>
+                <div *ngIf="!readonly" class="col-sm-2 form-group">
+                    <button mat-raised-button color="accent" type="submit" 
+                        (click)="test(programroleform.valid,programroleform)">Save</button>
+                </div>
+                <div class="col-sm-2 form-group">
+                    <button mat-raised-button color="warn" (click)="back()">Close</button>
+                </div>
+            </div>
+    </form>
+</div>
